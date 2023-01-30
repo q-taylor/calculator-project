@@ -35,9 +35,12 @@ function populateDisp (pressedBtn) {
      console.log(pressedBtn.target)
      const btnTxt = pressedBtn.target.textContent;
      console.log(btnTxt);
+     if (btnTxt == 'CLEAR') {
+        displayTxt.textContent = '';
+     } else {
      const displayTxt = document.getElementById('displayTxt');
      displayTxt.textContent += btnTxt;
-
+    }
 }
 
 // add event listener for each button and run populateDisp function on click
