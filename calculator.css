@@ -37,8 +37,8 @@ body {
 #buttons {
     display: flex;
     justify-content: space-evenly;
-    width: 392px;
-    height: 300px;
+    width: 43vw;
+    height: 36vw;
 }
 
 .nmbr {
@@ -54,7 +54,7 @@ body {
     justify-content: space-around;
     flex-wrap: wrap-reverse;
     height: auto;
-    width: 230px;
+    width: 30vw;
 }
 
 #addBtn, #subBtn, #multBtn, #divBtn {
@@ -67,7 +67,7 @@ body {
 }
 
 #clearBtn {
-    flex: 5 1 100%;
+    flex: 4 1 100%;
 }
 
 #computeBtn {
