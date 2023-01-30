@@ -1,10 +1,7 @@
 
 // add event listener for each element in 'btn' class and run pressedBtn function on click
 const btn = document.querySelectorAll('.btn')
-console.log({btn});
-btn.forEach(btn => {
-    return btn.addEventListener('click', pressedBtn);
-});
+btn.forEach(btn => btn.addEventListener('click', pressedBtn));
 
 
 //operator button functions
@@ -42,7 +39,7 @@ function operate(operator, a, b) {
 function pressedBtn (input) {
     const btnTxt = input.target.textContent;
     if (btnTxt == '=') {
-            computeArray(document.getElementById('displayTxt').textContent); //gets current textContent of display
+            calculate(createArray(document.getElementById('displayTxt').textContent)); //gets current textContent of display
     } else {
         populateDisp(btnTxt);
         return btnTxt;
@@ -62,14 +59,26 @@ function populateDisp (input) {
         }
 }
 
-//add input to computeArray
-function computeArray(input) {
+//add input to createArray split on spaces and return array
+function createArray(input) {
     const array = input.split(' ');     //split string on spaces and create array of numbers and operators
-    array.forEach((element, index) => {  //iterate through each array item
+    return array;
+}
+
+//compute operators and splice array
+function calculate(array) {
+    array.forEach((element, index) => {
+        console.log(isNaN(+element));
         if (isNaN(+element)) {      //check if element is a number, if it is NaN then it must be an operator
-            console.log(operate(element, array[index-1], array[index+1]));  //when operator is found run it on the previous and next elements
-        }
-    });
+                let answer = operate(element, array[index-1], array[index+1]);  //when operator is found run it on the previous and next elements
+                console.log(answer);
+                console.log(array);
+                array.splice(0, 3, answer.toString());  //remove first three elements that were just operated and add answer as first element
+                console.log(array);
+                console.log(typeof element);
+                calculate(array);  //callback compute
+            } 
+    })
 }
 
 
