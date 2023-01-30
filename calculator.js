@@ -1,3 +1,13 @@
+
+// add event listener for each element in 'btn' class and run pressedBtn function on click
+const btn = document.querySelectorAll('.btn')
+console.log({btn});
+btn.forEach(btn => {
+    return btn.addEventListener('click', pressedBtn);
+});
+
+
+//operator button functions
 function add(a, b) {
     return a + b;
 }
@@ -27,38 +37,37 @@ function operate(operator, a, b) {
             return divide(a, b);
     }
 }
-// get which button is pressed and return number using event delegation
-// add number to array
-// make string from array, remove commas
 
-function populateDisp (pressedBtn) {
-    if (pressedBtn.target.id != 'buttons' && pressedBtn.target.id != 'nmb') {
-        const btnTxt = pressedBtn.target.textContent;
-        console.log(btnTxt);
-        if (btnTxt == 'CLEAR') {
+//get which button is pressed output button text
+function pressedBtn (input) {
+    const btnTxt = input.target.textContent;
+    if (btnTxt == '=') {
+
+    } else {
+        populateDisp(btnTxt);
+        return btnTxt;
+    }
+}
+
+//put input on display or clear display if clear button pressed
+function populateDisp (input) {
+        if (input == 'CLEAR') {
             displayTxt.textContent = '';
+        } else if (input == '+' || input == '-' || input == 'x' || input == '/') {
+            const displayTxt = document.getElementById('displayTxt');
+            displayTxt.textContent += ` ${input} `;
         } else {
         const displayTxt = document.getElementById('displayTxt');
-        displayTxt.textContent += btnTxt;
-        
-        //displayTxt.scrollWidth > displayTxt.clientWidth ? displayTxt.style.fontSize = '70%' : displayTxt.style.fontSize = '100%';
+        displayTxt.textContent += input;
         }
-    } else {
-        return false; 
-    } 
 }
 
-// add event listener for each button and run populateDisp function on click
-const btn = document.querySelectorAll('.btn')
-console.log({btn});
-btn.forEach(pressedBtn => {
-    console.log({pressedBtn});
-    const txt = pressedBtn.addEventListener('click', populateDisp);
-    return txt;
-});
+//add input to computeArray
+function arrayAdd(input) {
 
-// scale font size
-
-function scaleFontSize (element) {
-    const txt = document.getElementById(element)
 }
+
+
+// get which button is pressed and return number
+// add number to array
+// make string from array, remove commas

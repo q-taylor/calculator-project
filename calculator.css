@@ -36,8 +36,9 @@ body {
 }
 
 .btn {
-    width: 5vw;
-    flex: 1 1 30%;
+   
+    flex: 1 1 28%;
+    margin: 1px;
 }
 
 #buttons {
@@ -59,7 +60,9 @@ body {
 }
 
 #addBtn, #subBtn, #multBtn, #divBtn {
-    flex: 1 1 25%;
+    flex: 1 1 23%;
+    height: 10vw;
+    align-self: center;
 }
 
 #operatorBtns {
@@ -73,5 +76,5 @@ body {
 }
 
 #computeBtn {
-    flex: 4 1 60%;
+    flex: 4 1 100%;
 }
