@@ -27,3 +27,20 @@ function operate(operator, a, b) {
             return divide(a, b);
     }
 }
+// get which button is pressed and return number using event delegation
+// add number to array
+// make string from array, remove commas
+
+function populateDisp (pressedBtn) {
+     console.log(pressedBtn.target)
+     const btnTxt = pressedBtn.target.textContent;
+     console.log(btnTxt);
+     const displayTxt = document.getElementById('displayTxt');
+     displayTxt.textContent += btnTxt;
+
+}
+
+// add event listener for each button and run populateDisp function on click
+const buttons = document.querySelectorAll('#buttons')
+buttons.forEach(pressedBtn => pressedBtn.addEventListener('click', populateDisp));
+
