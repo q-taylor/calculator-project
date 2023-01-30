@@ -12,8 +12,8 @@ body {
 
 #display {
     flex: 1 1 auto;
-    width: 200px;
-    height: 100px;
+    width: 500px;
+    height: 150px;
     border: 2px solid black;
     background-color: rgb(98, 133, 238);
 }
@@ -21,8 +21,8 @@ body {
 #buttons {
     display: flex;
     justify-content: space-evenly;
-    width: 290px;
-    height: 290px;
+    width: 392px;
+    height: 300px;
 }
 
 .nmbr {
