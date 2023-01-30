@@ -49,9 +49,9 @@ function populateDisp (pressedBtn) {
 }
 
 // add event listener for each button and run populateDisp function on click
-const buttons = document.querySelectorAll('#buttons')
-console.log({buttons});
-buttons.forEach(pressedBtn => {
+const btn = document.querySelectorAll('.btn')
+console.log({btn});
+btn.forEach(pressedBtn => {
     console.log({pressedBtn});
     const txt = pressedBtn.addEventListener('click', populateDisp);
     return txt;
