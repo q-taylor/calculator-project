@@ -30,7 +30,7 @@ body {
     height: 13vw;
     text-align: center;
     vertical-align: center;
-    font-size: clamp(3rem, 15vw, 10rem);
+    font-size: clamp(3rem, 2vw, 10rem);
     font-family: 'digital7';
     
 }

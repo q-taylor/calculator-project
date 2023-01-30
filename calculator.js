@@ -9,7 +9,7 @@ btn.forEach(btn => {
 
 //operator button functions
 function add(a, b) {
-    return a + b;
+    return +a + +b;
 }
 
 function subtract(a, b) {
@@ -42,7 +42,7 @@ function operate(operator, a, b) {
 function pressedBtn (input) {
     const btnTxt = input.target.textContent;
     if (btnTxt == '=') {
-
+            computeArray(document.getElementById('displayTxt').textContent); //gets current textContent of display
     } else {
         populateDisp(btnTxt);
         return btnTxt;
@@ -63,8 +63,13 @@ function populateDisp (input) {
 }
 
 //add input to computeArray
-function arrayAdd(input) {
-
+function computeArray(input) {
+    const array = input.split(' ');     //split string on spaces and create array of numbers and operators
+    array.forEach((element, index) => {  //iterate through each array item
+        if (isNaN(+element)) {      //check if element is a number, if it is NaN then it must be an operator
+            console.log(operate(element, array[index-1], array[index+1]));  //when operator is found run it on the previous and next elements
+        }
+    });
 }
 
 
