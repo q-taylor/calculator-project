@@ -35,15 +35,16 @@ body {
     
 }
 
+.btn {
+    width: 5vw;
+    flex: 1 1 30%;
+}
+
 #buttons {
     display: flex;
     justify-content: space-evenly;
     width: 43vw;
     height: 36vw;
-}
-
-.nmbr {
-    flex: 3 1 30%;
 }
 
 #btn0 {
@@ -52,9 +53,8 @@ body {
 
 #nmbrBtns {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap-reverse;
-    
     width: 30vw;
 }
 
