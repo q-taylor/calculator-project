@@ -36,37 +36,43 @@ function operate(operator, a, b) {
     }
 }
 
-//get which button is pressed output button text
+//get which button is pressed
 function pressedBtn (input) {
     const btnTxt = input.target.textContent;
     console.log(btnTxt);
     console.log(displayTxt.textContent);
     if (btnTxt == '=') {
             calculate(createArray(displayTxt.textContent)); //gets current textContent of display
-    } else if (btnTxt == 'backspace') {  //backspace button removes last character of string in displayTxt
-        displayTxt.textContent = displayTxt.textContent.substring(0, (displayTxt.textContent.length - 1));
-    }
-    
-    else {
+    } else if (btnTxt == 'backspace') {  
+        populateDisp(btnTxt);
+    } else if (btnTxt == '+' || btnTxt == '-' || btnTxt == 'x' || btnTxt == '/') {
+            populateDisp(` ${btnTxt} `);
+    } else if (btnTxt == 'CLEAR') {
+            populateDisp('');
+    } else {
         populateDisp(btnTxt);
         return btnTxt;
     }
 }
 
-//put input on display or clear display if clear button pressed
+//add input to display, delete last entry if backspace pressed, or clear display for clear
 function populateDisp (input) {
-        if (input == 'CLEAR') {
-            displayTxt.textContent = '';
-        } else if (input == '+' || input == '-' || input == 'x' || input == '/') {
-            displayTxt.textContent += ` ${input} `;
-        } else {
+    if (input == '') {
+        displayTxt.textContent = '';
+    } else if (input == 'backspace') {  //backspace button removes last entry of string in displayTxt
+        displayTxt.textContent = displayTxt.textContent.substring(0, (displayTxt.textContent.endsWith(' ')) ?
+        (displayTxt.textContent.length - 3) : (displayTxt.textContent.length - 1)); 
+            //num of characteres to remove depends on if the last char is a space
+            // since there are spaces around the operators
+    } 
+    else {
         displayTxt.textContent += input;
-        }
+    }
 }
 
-//add input to createArray split on spaces and return array
-function createArray(input) {
-    const array = input.split(' ');     //split string on spaces and create array of numbers and operators
+//add input to createArray, split on spaces and return array
+function createArray(string) {
+    const array = string.split(' ');     //split string on spaces and create array of numbers and operators
     return array;
 }
 
@@ -84,7 +90,3 @@ function calculate(array) {
     });
 }
 
-
-// get which button is pressed and return number
-// add number to array
-// make string from array, remove commas
