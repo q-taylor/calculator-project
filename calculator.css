@@ -34,6 +34,7 @@ body {
     font-family: 'digital7';
     white-space: pre-wrap;
     margin: 1rem;
+    overflow: auto;
     
 }
 
