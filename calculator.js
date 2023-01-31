@@ -42,13 +42,16 @@ function pressedBtn (input) {
     console.log(btnTxt);
     console.log(displayTxt.textContent);
     if (btnTxt == '=') {
-            calculate(createArray(displayTxt.textContent)); //gets current textContent of display
+        
+        //gets current textContent of display and sends to calculate function
+        calculate(createArray(displayTxt.textContent));
+        
     } else if (btnTxt == 'backspace') {  
         populateDisp(btnTxt);
     } else if (btnTxt == '+' || btnTxt == '-' || btnTxt == 'x' || btnTxt == '/') {
-            populateDisp(` ${btnTxt} `);
+        populateDisp(` ${btnTxt} `);
     } else if (btnTxt == 'CLEAR') {
-            populateDisp('');
+        populateDisp('');
     } else {
         populateDisp(btnTxt);
         return btnTxt;
@@ -64,7 +67,9 @@ function populateDisp (input) {
         (displayTxt.textContent.length - 3) : (displayTxt.textContent.length - 1)); 
             //num of characteres to remove depends on if the last char is a space
             // since there are spaces around the operators
-    } 
+    } else if (input == '=') {
+        displayTxt.textContent = ``
+    }
     else {
         displayTxt.textContent += input;
     }
@@ -72,7 +77,7 @@ function populateDisp (input) {
 
 //add input to createArray, split on spaces and return array
 function createArray(string) {
-    const array = string.split(' ');     //split string on spaces and create array of numbers and operators
+    const array = string.split(' ');  //split string on spaces and create array of numbers and operators
     return array;
 }
 
@@ -82,11 +87,11 @@ function calculate(array) {
         if (isNaN(+element)) {      //check if element is NaN, if it is NaN then it must be an operator
                 const answer = operate(element, array[index-1], array[index+1]);  //when operator is found run it on the previous and next elements
                 console.log({answer});
-                console.log(array);
                 array.splice(0, 3, answer.toString());  //remove first three elements that were just operated and add string answer as first element
                 console.log(array);
                 calculate(array);  //callback calculate to start at beginning of array
             } 
+        
     });
 }
 
