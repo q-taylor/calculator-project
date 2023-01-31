@@ -69,9 +69,10 @@ function populateDisp (input) {
             // since there are spaces around the operators
     } else if (input == '=') {
         displayTxt.textContent = ``
-    } else if (typeof input == 'object') {
-        //create string from array, replace commas with spaces, 
-        displayTxt.textContent = input.toString().replace(/,/g, ' ');
+    } else if (typeof input == 'object') {  //check if array is being asked to be shown
+        //create string from array, replace commas with spaces, add to display after equals sign
+        displayTxt.textContent += `
+         = ${input.toString().replace(/,/g, ' ')}`;
     } else {
         displayTxt.textContent += input;
     }
@@ -92,6 +93,7 @@ function calculate(array) {
                 console.log({answer});
                 //remove first three elements that were just operated and add string answer as first element
                 array.splice(0, 3, answer.toString());
+                // send array to populateDisp to show it
                 populateDisp(array);
                 console.log(array.toString().replace(/,/g, ' '));
                 calculate(array);  //callback calculate to start at beginning of array
