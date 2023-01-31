@@ -42,7 +42,7 @@ function pressedBtn (input) {
     console.log(btnTxt);
     console.log(displayTxt.textContent);
     if (btnTxt == '=') {
-        
+
         //gets current textContent of display and sends to calculate function
         calculate(createArray(displayTxt.textContent));
         
@@ -69,8 +69,10 @@ function populateDisp (input) {
             // since there are spaces around the operators
     } else if (input == '=') {
         displayTxt.textContent = ``
-    }
-    else {
+    } else if (typeof input == 'object') {
+        //create string from array, replace commas with spaces, 
+        displayTxt.textContent = input.toString().replace(/,/g, ' ');
+    } else {
         displayTxt.textContent += input;
     }
 }
@@ -85,10 +87,13 @@ function createArray(string) {
 function calculate(array) {
     array.forEach((element, index) => {  //iterate through array
         if (isNaN(+element)) {      //check if element is NaN, if it is NaN then it must be an operator
-                const answer = operate(element, array[index-1], array[index+1]);  //when operator is found run it on the previous and next elements
+                //when operator is found run it on the previous and next elements
+                const answer = operate(element, array[index-1], array[index+1]);  
                 console.log({answer});
-                array.splice(0, 3, answer.toString());  //remove first three elements that were just operated and add string answer as first element
-                console.log(array);
+                //remove first three elements that were just operated and add string answer as first element
+                array.splice(0, 3, answer.toString());
+                populateDisp(array);
+                console.log(array.toString().replace(/,/g, ' '));
                 calculate(array);  //callback calculate to start at beginning of array
             } 
         
