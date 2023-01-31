@@ -76,6 +76,8 @@ function populateDisp (input) {
     } else {
         displayTxt.textContent += input;
     }
+    //scroll to bottom of t displayTxt
+    displayTxt.scroll(0, displayTxt.scrollHeight);
 }
 
 //add input to createArray, split on spaces and return array
