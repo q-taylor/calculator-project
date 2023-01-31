@@ -3,6 +3,7 @@
 const btn = document.querySelectorAll('.btn')
 btn.forEach(btn => btn.addEventListener('click', pressedBtn));
 
+const displayTxt = document.getElementById('displayTxt');
 
 //operator button functions
 function add(a, b) {
@@ -38,9 +39,15 @@ function operate(operator, a, b) {
 //get which button is pressed output button text
 function pressedBtn (input) {
     const btnTxt = input.target.textContent;
+    console.log(btnTxt);
+    console.log(displayTxt.textContent);
     if (btnTxt == '=') {
-            calculate(createArray(document.getElementById('displayTxt').textContent)); //gets current textContent of display
-    } else {
+            calculate(createArray(displayTxt.textContent)); //gets current textContent of display
+    } else if (btnTxt == 'backspace') {  //backspace button removes last character of string in displayTxt
+        displayTxt.textContent = displayTxt.textContent.substring(0, (displayTxt.textContent.length - 1));
+    }
+    
+    else {
         populateDisp(btnTxt);
         return btnTxt;
     }
@@ -51,10 +58,8 @@ function populateDisp (input) {
         if (input == 'CLEAR') {
             displayTxt.textContent = '';
         } else if (input == '+' || input == '-' || input == 'x' || input == '/') {
-            const displayTxt = document.getElementById('displayTxt');
             displayTxt.textContent += ` ${input} `;
         } else {
-        const displayTxt = document.getElementById('displayTxt');
         displayTxt.textContent += input;
         }
 }
@@ -67,18 +72,16 @@ function createArray(input) {
 
 //compute operators and splice array
 function calculate(array) {
-    array.forEach((element, index) => {
-        console.log(isNaN(+element));
-        if (isNaN(+element)) {      //check if element is a number, if it is NaN then it must be an operator
-                let answer = operate(element, array[index-1], array[index+1]);  //when operator is found run it on the previous and next elements
-                console.log(answer);
+    array.forEach((element, index) => {  //iterate through array
+        if (isNaN(+element)) {      //check if element is NaN, if it is NaN then it must be an operator
+                const answer = operate(element, array[index-1], array[index+1]);  //when operator is found run it on the previous and next elements
+                console.log({answer});
                 console.log(array);
-                array.splice(0, 3, answer.toString());  //remove first three elements that were just operated and add answer as first element
+                array.splice(0, 3, answer.toString());  //remove first three elements that were just operated and add string answer as first element
                 console.log(array);
-                console.log(typeof element);
-                calculate(array);  //callback compute
+                calculate(array);  //callback calculate to start at beginning of array
             } 
-    })
+    });
 }
 
 
