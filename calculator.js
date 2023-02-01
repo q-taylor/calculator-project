@@ -48,7 +48,8 @@ function pressedBtn (input) {
     console.log({btnTxt});
     console.log(displayTxt.textContent);
     if (btnTxt == '=') {`""`
-        if (displayTxt.textContent.includes('=')) { // if = is already present in displayTxt then clear
+        if (displayTxt.textContent.includes('=')) { 
+            // if = is already present in displayTxt then only get text after last = sign
             calculate(createArray(displayTxt.textContent.slice(displayTxt.textContent.lastIndexOf('=')+1)));
         } else {
         //gets current textContent of display after the last equals sign and sends to calculate function
@@ -60,9 +61,13 @@ function pressedBtn (input) {
         populateDisp(` ${btnTxt} `);
     } else if (btnTxt == 'CLEAR') {
         populateDisp('');
-    } else {
+    } else if (btnTxt == '.') {
+        //if trying to enter two decimals in a row then don't populate
+        displayTxt.textContent.endsWith('.')  ? displayTxt.textContent = displayTxt.textContent :
         populateDisp(btnTxt);
-        return btnTxt;
+    }else {
+            populateDisp(btnTxt);
+            return btnTxt;
     }
 }
 
