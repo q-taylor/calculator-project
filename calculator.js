@@ -41,7 +41,7 @@ function pressedBtn (input) {
     const btnTxt = input.target.textContent;
     console.log({btnTxt});
     console.log(displayTxt.textContent);
-    if (btnTxt == '=') {
+    if (btnTxt == '=') {`""`
         if (displayTxt.textContent.includes('=')) { // if = is already present in displayTxt then clear
             displayTxt.textContent = '';
         } else {
@@ -74,8 +74,12 @@ function populateDisp (input) {
         displayTxt.textContent = ``
     } else if (typeof input == 'object') {  //check if array is being asked to be shown
         //create string from array, replace commas with spaces, add to display after equals sign
-        displayTxt.textContent += `
-         = ${input.toString().replace(/,/g, ' ')}`;
+        if (input[0] == 'NaN') {
+            displayTxt.textContent = 'ERROR: Not a Number'
+        }else {
+            displayTxt.textContent += 
+            ` = ${input.toString().replace(/,/g, ' ')}`;
+        }
     } else {
         displayTxt.textContent += input;
     }
@@ -85,7 +89,7 @@ function populateDisp (input) {
 
 //add input to createArray, split on spaces and return array
 function createArray(string) {
-    const array = string.split(' ');  //split string on spaces and create array of numbers and operators
+    const array = string.trimStart().split(/\s+/);  //split string on spaces and create array of numbers and operators
     return array;
 }
 
@@ -93,22 +97,30 @@ function createArray(string) {
 function calculate(array) {
     console.log(`array starts with: ${array[0]}`);
     //check if array starts with '='
-    if (array[0] == '=') {
+    if (array[0] == ' ') {
         displayTxt.textContent = 'ERROR';
     } else {
 
         array.forEach((element, index, array) => {  //iterate through array
-                if (isNaN(+element)) {      //check if element is NaN, if it is NaN then it must be an operator
-                    console.log({element});
-                    //when operator is found run it on the previous and next elements
-                    const answer = operate(element, array[index-1], array[index+1]);  
-                    console.log({answer});
-                    //remove first three elements that were just operated and add string answer as first element
-                    array.splice(0, 3, answer.toString());
-                    // send array to populateDisp to show it
-                    populateDisp(array);
-                    
-                    calculate(array);  //callback calculate to start at beginning of array                
+            //check if element is NaN, if it is NaN then it must be an operator
+            if ((isNaN(+element)) && index != '0' && element != NaN) {      
+                console.log(`Array: ${array}`);
+                console.log({index});
+                console.log({element});
+                console.log(array[(index-1)]);
+                console.log(array[index+1]);
+                //when operator is found run it on the previous and next elements
+                const answer = operate(element, array[index-1], array[index+1]);
+                if (answer == 'NaN') {
+                    populateDisp(answer);
+                }
+                console.log({answer});
+                //remove first three elements that were just operated and add string answer as first element
+                array.splice(0, 3, answer.toString());
+                // send array to populateDisp to show it
+                populateDisp(array);
+                
+                calculate(array);  //callback calculate to start at beginning of array                
                 }
         });
     }
