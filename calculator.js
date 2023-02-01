@@ -84,7 +84,7 @@ function populateDisp (input) {
     } else {
         displayTxt.textContent += input;
     }
-    //scroll to bottom of t displayTxt
+    //scroll to bottom of displayTxt
     displayTxt.scroll(0, displayTxt.scrollHeight);
 }
 
@@ -112,14 +112,12 @@ function calculate(array) {
                 console.log(array[index+1]);
                 //when operator is found run it on the previous and next elements
                 const answer = operate(element, array[index-1], array[index+1]);
-                if (answer == 'NaN') {
-                    populateDisp(answer);
-                }
-                console.log({answer});
                 //remove first three elements that were just operated and add string answer as first element
                 array.splice(0, 3, answer.toString());
                 // send array to populateDisp to show it
                 populateDisp(array);
+                console.log({answer});
+                
                 
                 calculate(array);  //callback calculate to start at beginning of array                
                 }
