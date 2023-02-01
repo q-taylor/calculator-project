@@ -1,4 +1,4 @@
-let calc_Counter = 0;
+
 // add event listener for each element in 'btn' class and run pressedBtn function on click
 const btn = document.querySelectorAll('.btn')
 btn.forEach(btn => btn.addEventListener('click', pressedBtn));
@@ -38,19 +38,17 @@ function operate(operator, a, b) {
 
 //get which button is pressed
 function pressedBtn (input) {
-    console.log({calc_Counter});
     const btnTxt = input.target.textContent;
     console.log({btnTxt});
     console.log(displayTxt.textContent);
     if (btnTxt == '=') {
-        if (calc_Counter == 0) {
-                
-                //gets current textContent of display and sends to calculate function
-                calculate(createArray(displayTxt.textContent)) 
-        } else {
+        if (displayTxt.textContent.includes('=')) { // if = is already present in displayTxt then clear
             displayTxt.textContent = '';
-            calc_Counter = 0;
-        };       
+        } else {
+        //gets current textContent of display and sends to calculate function
+        calculate(createArray(displayTxt.textContent));
+        }
+
     } else if (btnTxt == 'backspace') {  
         populateDisp(btnTxt);
     } else if (btnTxt == '+' || btnTxt == '-' || btnTxt == 'x' || btnTxt == '/') {
@@ -93,30 +91,26 @@ function createArray(string) {
 
 //compute operators and splice array
 function calculate(array) {
-    
-    //displayTxt.textContent = '';
     console.log(`array starts with: ${array[0]}`);
     //check if array starts with '='
     if (array[0] == '=') {
         displayTxt.textContent = 'ERROR';
     } else {
 
-        array.forEach((element, index) => {  //iterate through array
+        array.forEach((element, index, array) => {  //iterate through array
                 if (isNaN(+element)) {      //check if element is NaN, if it is NaN then it must be an operator
                     console.log({element});
-                        calc_Counter = 1;
-                        //when operator is found run it on the previous and next elements
-                        const answer = operate(element, array[index-1], array[index+1]);  
-                        console.log({answer});
-                        //remove first three elements that were just operated and add string answer as first element
-                        array.splice(0, 3, answer.toString());
-                        // send array to populateDisp to show it
-                        populateDisp(array);
-                        console.log(array.toString().replace(/,/g, ' '));
-                        calculate(array);  //callback calculate to start at beginning of array
+                    //when operator is found run it on the previous and next elements
+                    const answer = operate(element, array[index-1], array[index+1]);  
+                    console.log({answer});
+                    //remove first three elements that were just operated and add string answer as first element
+                    array.splice(0, 3, answer.toString());
+                    // send array to populateDisp to show it
+                    populateDisp(array);
                     
+                    calculate(array);  //callback calculate to start at beginning of array                
                 }
-            });
+        });
     }
 }
 
