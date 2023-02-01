@@ -62,8 +62,8 @@ function pressedBtn (input) {
     } else if (btnTxt == 'CLEAR') {
         populateDisp('');
     } else if (btnTxt == '.') {
-        //if trying to enter two decimals in a row then don't populate
-        displayTxt.textContent.endsWith('.')  ? displayTxt.textContent = displayTxt.textContent :
+        //if final number inlcudes a decimal already then don't populate
+        displayTxt.textContent.slice(displayTxt.textContent.lastIndexOf(' ')).includes('.') ? displayTxt.textContent = displayTxt.textContent :
         populateDisp(btnTxt);
     }else {
             populateDisp(btnTxt);
