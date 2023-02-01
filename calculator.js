@@ -30,10 +30,16 @@ function operate(operator, a, b) {
             return subtract(a, b);
         case 'x':
         case '*':
-            return multiply(a, b);
+            return round ((multiply(a, b)), 2);
         case '/':
-            return divide(a, b);
+            return round ((divide(a, b)), 2);
     }
+}
+
+function round(num, decimalPlaces = 0) {
+    var p = Math.pow(10, decimalPlaces);
+    var n = (num * p) * (1 + Number.EPSILON);
+    return Math.round(n) / p;
 }
 
 //get which button is pressed
