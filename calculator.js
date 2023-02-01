@@ -74,8 +74,10 @@ function populateDisp (input) {
     } else if (typeof input == 'object') {  //check if array is being asked to be shown
         //create string from array, replace commas with spaces, add to display after equals sign
         if (input[0] == 'NaN') {
-            displayTxt.textContent = 'ERROR: Not a Number'
-        }else {
+            displayTxt.textContent = 'ERROR: Not a Number';
+        } else if (input[0] == Infinity) {
+            displayTxt.textContent = 'Are you trying to break the universe?!';
+        } else {
             displayTxt.textContent += `
              = ${input.toString().replace(/,/g, ' ')}`;
         }
@@ -99,10 +101,10 @@ function calculate(array) {
     if (array[0] == ' ') {
         displayTxt.textContent = 'ERROR';
     } else {
-
         array.forEach((element, index, array) => {  //iterate through array
             //check if element is NaN, if it is NaN then it must be an operator
-            if ((isNaN(+element)) && index != '0' && element != NaN && element != '=') {      
+            //make sure the element is not = to prevent errors
+            if ((isNaN(+element)) && element != '=') {      
                 console.log(`Array: ${array}`);
                 console.log({index});
                 console.log({element});
