@@ -25,9 +25,9 @@ function divide(a, b) {
 function operate(operator, a, b) {
     switch(operator) {
         case '+':
-            return add(a, b);
+            return round ((add(a, b)), 2);
         case '-':
-            return subtract(a, b);
+            return round ((subtract(a, b)), 2);
         case 'x':
         case '*':
             return round ((multiply(a, b)), 2);

@@ -57,7 +57,13 @@ body {
 }
 
 #btn0 {
-    flex: 4 1 100%;
+    flex: 2 1 60%;
+}
+
+#decimal {
+    flex: 2 1 20%;
+    background-color: rgba(149, 205, 255, 0.568);
+    font-style: bold;
 }
 
 #nmbrBtns {
@@ -71,6 +77,7 @@ body {
     flex: 1 1 23%;
     height: 10vw;
     align-self: center;
+    background-color:rgba(189, 200, 235, 0.548)
 }
 
 #operatorBtns {
@@ -81,6 +88,7 @@ body {
 
 #clearBtn {
     flex: 4 1 70%;
+    background-color: rgba(255, 56, 56, 0.452);
 }
 
 #computeBtn {
