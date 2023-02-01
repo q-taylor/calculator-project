@@ -43,12 +43,11 @@ function pressedBtn (input) {
     console.log(displayTxt.textContent);
     if (btnTxt == '=') {`""`
         if (displayTxt.textContent.includes('=')) { // if = is already present in displayTxt then clear
-            displayTxt.textContent = '';
+            calculate(createArray(displayTxt.textContent.slice(displayTxt.textContent.lastIndexOf('=')+1)));
         } else {
-        //gets current textContent of display and sends to calculate function
+        //gets current textContent of display after the last equals sign and sends to calculate function
         calculate(createArray(displayTxt.textContent));
         }
-
     } else if (btnTxt == 'backspace') {  
         populateDisp(btnTxt);
     } else if (btnTxt == '+' || btnTxt == '-' || btnTxt == 'x' || btnTxt == '/') {
@@ -77,8 +76,8 @@ function populateDisp (input) {
         if (input[0] == 'NaN') {
             displayTxt.textContent = 'ERROR: Not a Number'
         }else {
-            displayTxt.textContent += 
-            ` = ${input.toString().replace(/,/g, ' ')}`;
+            displayTxt.textContent += `
+             = ${input.toString().replace(/,/g, ' ')}`;
         }
     } else {
         displayTxt.textContent += input;
@@ -103,7 +102,7 @@ function calculate(array) {
 
         array.forEach((element, index, array) => {  //iterate through array
             //check if element is NaN, if it is NaN then it must be an operator
-            if ((isNaN(+element)) && index != '0' && element != NaN) {      
+            if ((isNaN(+element)) && index != '0' && element != NaN && element != '=') {      
                 console.log(`Array: ${array}`);
                 console.log({index});
                 console.log({element});
